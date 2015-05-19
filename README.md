@@ -17,11 +17,16 @@ It is intended to be used for local test development. It is *not* to be used for
 # Usage
 
 ```javascript
-var simpleFsRest = require('simple-fs-rest');
 var express = require('express');
+var simpleFsRest = require('simple-fs-rest');
 var app = express();
-// Link the REST Service to a uri path
+
+// Link the REST Service to anything under /api. ex: /api/users/
 app.use('/api',simpleFsRest());
+// Link a second api path, using the ".data2" directory to hold files
+app.use('/api2',simpleFsRest('.data2/'));
+
+app.listen(8080);
 ```
 
 # Limitations
@@ -71,7 +76,7 @@ Returns the contents of "users/1.json"
 POST /users {"name":"Joe"}
 ```
 
-Creates a new files in the "users" directory. Since no id is given in the object, it generates one to be the max(id) of files in the "users" directory and assignes it to the object.
+Creates a new file in the "users" directory. Since no id is given in the object, it generates one to be the max(id) of files in the "users" directory and assigns it to the object.
 
 ```
 POST /servers/windows/xp/ {"name":"server1"}

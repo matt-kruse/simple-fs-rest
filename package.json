@@ -1,6 +1,6 @@
 {
   "name": "simple-fs-rest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple file-based REST service with no design, setup, or configuration required.",
   "main": "index.js",
   "scripts": {
