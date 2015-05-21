@@ -51,7 +51,7 @@ function max_id(dir) {
 // Define the router that can be attached to express
 function rest_server(data_dir,server) {
 	if (!data_dir) {
-		data_dir = __dirname + "/.data/";
+		data_dir = ".data/";
 	}
 	if (!/\/$/.test(data_dir)) {
 		data_dir += "/";

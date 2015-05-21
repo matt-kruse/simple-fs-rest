@@ -1,13 +1,16 @@
 {
   "name": "simple-fs-rest",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple file-based REST service with no design, setup, or configuration required.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Matt Kruse <github@mattkruse.com> (http://mattkruse.com/)",
-  "keywords": ["rest","fs"],
+  "keywords": [
+    "rest",
+    "fs"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/matt-kruse/simple-fs-rest.git"
@@ -20,5 +23,6 @@
     "body-parser": "^1.12.4",
     "express": "^4.12.3",
     "jsonpatch": "^1.0.1"
-  }
+  },
+  "devDependencies": {}
 }
