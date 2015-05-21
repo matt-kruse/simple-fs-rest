@@ -5,6 +5,9 @@ var bodyParser = require('body-parser');
 
 function directory_files(dir,sortField,filters) {
 	var all_files=[];
+	if (!/\/$/.test(dir)) {
+		dir += "/";
+	}
 	fs.readdirSync(dir).forEach(function(file){
 		if (fs.lstatSync(dir+file).isFile()) {
 			try {
