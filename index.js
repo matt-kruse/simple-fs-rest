@@ -48,6 +48,12 @@ function max_id(dir) {
 	return 0;
 };
 
+function mkdir(dir) {
+	if (!fs.existsSync(dir)) {
+		fs.mkdirSync(dir);
+	}
+}
+
 // Define the router that can be attached to express
 function rest_server(data_dir,server) {
 	if (!data_dir) {
@@ -56,9 +62,7 @@ function rest_server(data_dir,server) {
 	if (!/\/$/.test(data_dir)) {
 		data_dir += "/";
 	}
-	if (!fs.existsSync(data_dir) || !fs.statSync(data_dir).isDirectory()) {
-		fs.mkdirSync(data_dir);
-	}
+	mkdir(data_dir);
 	
 	// Create a new express route
 	server = server || express;
@@ -108,6 +112,9 @@ function rest_server(data_dir,server) {
 		else if ("POST"===method) {
 			var object = req.body;
 			var add_record = function(o) {
+				if (!/\/$/.test(resource)) {
+					resource += "/";
+				}
 				if (o && typeof o.id!="number") {
 					o.id = max_id(resource)+1;
 				}
@@ -124,7 +131,7 @@ function rest_server(data_dir,server) {
 				path.split('/').forEach(function(dir) {
 					if (dir && dir.length>0) {
 						current_dir += dir+"/";
-						fs.mkdirSync(current_dir);
+						mkdir(current_dir);
 					}
 				});
 				add_record(object);
