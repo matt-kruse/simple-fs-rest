@@ -5,7 +5,7 @@ A simple file-based REST service with no design, setup, or configuration require
 # Installation
 
 ```bash
-	npm install simple-fs-rest --save
+npm install simple-fs-rest --save
 ```
 
 # Summary
@@ -42,7 +42,26 @@ app.listen(8080);
 - Records are stored as .json files
 - All records must have a unique "id" field. If one is not specified, it will be generated and inserted into the object
 
-# Support REST Requests
+# Example
+
+```
+POST /users {"name":"Bob"}
+POST /users {"name":"Matt"}
+GET /users
+POST /users/1/foo/bar/fizz/buzz/comments {"content":"Boo"}
+```
+
+All of these calls will work without any setup, and will result in files being created in the ".data" directory.
+
+1. A "users" directory does not exist to write to, so it is created. The passed object does not contain an "id" attribute, so one is created and inserted into the object. The "users" directory is scanned for records, and none are found, the the id:1 is used. The file ".data/users/1.json" is created containing {"id":1,"name":"Bob"}
+
+2. Like step #1, but since 1.json already exists, the second object gets id:2 and is written to 2.json
+
+3. The "users" directory is scanned for .json files, and the response is the array: [{"id":1,"name":"Bob"},{"id":2,"name":"Matt"}]. By default, it is sorted by id, but if you wanted the records returned in order of name, you could use GET /users?sort=name
+
+4. This is a deeply nested endpoint, and none of the directories exist. They are each created so the entire directory structure, then the JSON content is written to the file ".data/users/1/foo/bar/fizz/buzz/comments/1.json".
+
+# Supported REST Requests
 
 ## GET
 
